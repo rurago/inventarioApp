@@ -57,6 +57,9 @@
         ],
         "post-install-cmd": [
             "@php artisan migrate --force"
+        ],
+        "post-install-cmd": [
+            "@php artisan migrate --force"
         ]
     },
     "extra": {
