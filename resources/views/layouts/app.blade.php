@@ -12,7 +12,13 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Scripts -->
+    
+    @env('local')
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @else
+        <link rel="stylesheet" href="{{ secure_asset('build/assets/app-'.hash_file('crc32', 'public/build/assets/app.css').'.css') }}">
+        <script src="{{ secure_asset('build/assets/app-'.hash_file('crc32', 'public/build/assets/app.js').'.js') }}" defer></script>
+    @endenv
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
