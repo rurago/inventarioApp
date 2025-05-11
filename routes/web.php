@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome'); // O tu vista personalizada
-});
+}); 
 
 // Grupo de rutas protegidas por autenticación
 Route::middleware(['auth', 'verified'])->group(function () {
