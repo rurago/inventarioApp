@@ -10,7 +10,6 @@ export default defineConfig({
   ],
   build: {
     manifest: true,
-    emptyOutDir: true,
     outDir: 'public/build',
     rollupOptions: {
       output: {
