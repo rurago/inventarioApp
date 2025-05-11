@@ -3,7 +3,7 @@
     "type": "module",
     "scripts": {
         "dev": "mix",
-        "watch": "mix watch",
+        "watch": "mix",
         "prod": "mix --production"
     },
     "devDependencies": {
