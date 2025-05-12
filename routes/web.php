@@ -16,6 +16,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('productos', ProductoController::class)->middleware('auth');
+    Route::resource('movimientos', MovimientoController::class)->middleware('auth');
+    Route::get('/historico', [MovimientoController::class, 'historico'])->middleware('auth');
+
+
 
 });
 
