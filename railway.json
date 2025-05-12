@@ -1,0 +1,12 @@
+{
+  "build": {
+    "builder": "nixpacks",
+    "cache": {
+      "enabled": true,
+      "paths": [
+        "node_modules",
+        "/root/.npm"
+      ]
+    }
+  }
+}
