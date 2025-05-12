@@ -30,5 +30,9 @@ Route::middleware(['auth', 'rol:almacenista'])->group(function () {
     Route::resource('movimientos', MovimientoController::class);
 });
 
+Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
+     ->middleware('auth')
+     ->name('verification.notice');
+
 
 require __DIR__.'/auth.php';
