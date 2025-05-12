@@ -1,54 +1,47 @@
-# Etapa de construcción
-FROM node:18-alpine AS build
+# ==================== ETAPA DE CONSTRUCCIÓN ====================
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-# 1. Copiar solo los archivos necesarios para instalar dependencias
+# 1. Copiar solo lo necesario para instalar dependencias
 COPY package.json package-lock.json vite.config.js ./
 
-# 2. Instalar dependencias
-RUN npm ci
+# 2. Instalar dependencias (con cache para Railway)
+RUN --mount=type=cache,target=/root/.npm \
+    npm ci --prefer-offline --no-audit
 
-# 3. Copiar el resto de los archivos
+# 3. Copiar el resto de archivos
 COPY . .
 
-# 4. Construir los assets
+# 4. Construir assets de producción
 RUN npm run build
 
-# Etapa de producción
-FROM php:8.2-apache
+# ==================== ETAPA DE PRODUCCIÓN ====================
+FROM php:8.2-cli
 
 WORKDIR /var/www/html
 
-# 1. Instalar dependencias de PHP
+# 1. Instalar dependencias del sistema
 RUN apt-get update && apt-get install -y \
     libzip-dev \
     zip \
-    && docker-php-ext-install zip pdo pdo_mysql
+    unzip \
+    && docker-php-ext-install zip pdo pdo_mysql \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
-# 2. Copiar los archivos de Laravel
-COPY . .
+# 2. Instalar Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# 3. Copiar los assets construidos desde la etapa de build
-COPY --from=build /app/public/build /var/www/html/public/build
+# 3. Copiar solo lo necesario
+COPY --from=builder /app /var/www/html
 
-# 4. Configurar Apache
-RUN chown -R www-data:www-data /var/www/html \
-    && a2enmod rewrite
+# 4. Instalar dependencias de PHP (sin dev)
+RUN composer install --no-dev --optimize-autoloader
 
-EXPOSE 80
-CMD ["apache2-foreground"]
+# 5. Configurar permisos
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Versión optimizada para Railway
-FROM node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json vite.config.js ./
-RUN npm ci
-COPY . .
-RUN npm run build
-
-FROM php:8.2-cli
-WORKDIR /var/www/html
-COPY --from=builder /app .
+# 6. Puerto y comando
 EXPOSE 8080
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+CMD ["php", "artisan",
