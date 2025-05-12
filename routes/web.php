@@ -3,9 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome'); // O tu vista personalizada
-});
+// Reemplaza la ruta welcome por una redirección al login
+Route::redirect('/', '/login');
 
 // Grupo de rutas protegidas por autenticación
 Route::middleware(['auth', 'verified'])->group(function () {
