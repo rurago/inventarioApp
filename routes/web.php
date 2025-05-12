@@ -19,8 +19,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('movimientos', MovimientoController::class)->middleware('auth');
     Route::get('/historico', [MovimientoController::class, 'historico'])->middleware('auth');
 
-
-
 });
+
+Route::middleware(['auth', 'rol:admin'])->group(function () {
+    Route::resource('productos', ProductoController::class);
+    // otras rutas exclusivas
+});
+
+Route::middleware(['auth', 'rol:almacenista'])->group(function () {
+    Route::resource('movimientos', MovimientoController::class);
+});
+
 
 require __DIR__.'/auth.php';
