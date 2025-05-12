@@ -33,18 +33,22 @@ RUN apt-get update && \
 # 2. Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 3. Copiar archivos de Laravel PRIMERO (incluyendo artisan)
+# 3. Copiar solo lo necesario desde builder
 COPY --from=builder /app .
 
-# 4. Instalar dependencias de PHP
-RUN composer install --no-dev --optimize-autoloader
+# 4. Verificar estructura de archivos
+RUN ls -la && \
+    ls -la vendor && \
+    ls -la bootstrap
 
-# 5. Verificar que artisan existe
-RUN ls -la && php artisan --version
+# 5. Instalar dependencias de PHP y verificar artisan
+RUN composer install --no-dev --optimize-autoloader && \
+    chmod +x artisan && \
+    php artisan --version
 
 # 6. Configurar permisos
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# 7. Puerto y comando
+# 7. Puerto y comando robusto
 EXPOSE 8080
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=8080"]
