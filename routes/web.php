@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\EmailVerificationPromptController;
+//use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
 
@@ -34,9 +34,9 @@ Route::middleware(['auth', 'rol:almacenista'])->group(function () {
 });
 
 // Muestra el prompt de verificación
-Route::get('/email/verify', EmailVerificationPromptController::class)
-     ->middleware('auth')
-     ->name('verification.notice');
+//Route::get('/email/verify', EmailVerificationPromptController::class)
+  //   ->middleware('auth')
+    // ->name('verification.notice');
 
 // Envía el email de verificación
 Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
