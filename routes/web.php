@@ -35,7 +35,10 @@ Route::middleware(['auth', 'rol:almacenista'])->group(function () {
 
 // Muestra el prompt de verificación
 Route::get('/email/verify', EmailVerificationPromptController::class)
-     ->middleware('auth');
+     ->middleware('auth')
+     ->name('verification.notice');
+
+     
 // Envía el email de verificación
 Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
      ->middleware(['auth', 'throttle:6,1'])
