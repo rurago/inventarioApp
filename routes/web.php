@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\EmailVerificationPromptController;
+
 
 // Reemplaza la ruta welcome por una redirección al login
 Route::redirect('/', '/login');
