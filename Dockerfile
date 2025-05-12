@@ -33,22 +33,25 @@ RUN apt-get update && \
 # 2. Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# 3. Copiar solo lo necesario desde builder
+# 3. Copiar archivos necesarios para composer
+COPY composer.json composer.lock ./
+
+# 4. Instalar dependencias de PHP primero
+RUN composer install --no-dev --optimize-autoloader
+
+# 5. Copiar el resto de archivos desde builder
 COPY --from=builder /app .
 
-# 4. Verificar estructura de archivos
+# 6. Verificar estructura de archivos (ahora sí existirán)
 RUN ls -la && \
     ls -la vendor && \
     ls -la bootstrap
 
-# 5. Instalar dependencias de PHP y verificar artisan
-RUN composer install --no-dev --optimize-autoloader && \
-    chmod +x artisan && \
-    php artisan --version
+# 7. Configurar permisos y verificar artisan
+RUN chmod +x artisan && \
+    php artisan --version && \
+    chown -R www-data:www-data storage bootstrap/cache
 
-# 6. Configurar permisos
-RUN chown -R www-data:www-data storage bootstrap/cache
-
-# 7. Puerto y comando robusto
+# 8. Puerto y comando
 EXPOSE 8080
 CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=8080"]
