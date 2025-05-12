@@ -1,14 +1,8 @@
-# ==================== ETAPA DE CONSTRUCCIÓN ====================
+# ==================== ETAPA DE CONSTRUCCIÓN FRONTEND ====================
 FROM node:18-alpine AS frontend-builder
 WORKDIR /app
-
-# 1. Copiar solo lo necesario para npm
 COPY package.json package-lock.json vite.config.js ./
-
-# 2. Instalar dependencias de Node
 RUN npm ci --prefer-offline --no-audit
-
-# 3. Copiar recursos y construir
 COPY resources/ ./resources/
 RUN npm run build
 
@@ -25,4 +19,23 @@ WORKDIR /var/www/html
 # 1. Instalar dependencias del sistema
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    libzip-dev zip unzip &&
+    libzip-dev zip unzip && \
+    docker-php-ext-install zip pdo pdo_mysql && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# 2. Copiar aplicación completa (Laravel y frontend compilado)
+COPY . .
+
+# 3. Copiar dependencias PHP instaladas
+COPY --from=composer-builder /app/vendor ./vendor
+
+# 4. Copiar assets generados por Vite
+COPY --from=frontend-builder /app/resources ./resources
+COPY --from=frontend-builder /app/public ./public
+
+# 5. Configurar permisos
+RUN chown -R www-data:www-data storage bootstrap/cache
+
+EXPOSE 8080
+CMD ["sh", "-c", "php artisan serve --host=0.0.0.0 --port=8080"]
