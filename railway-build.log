@@ -1,0 +1,51 @@
+
+[35m[Region: us-east4][0m
+[35m==============
+Using Nixpacks
+==============
+[0m
+context: k8p3-mB
+╔══════════════════════════════ Nixpacks v1.38.0 ══════════════════════════════╗
+║ setup      │ (php.withExtensions (pe: pe.enabled ++ [])), nginx,             ║
+║            │ libmysqlclient, phpPackages.composer, nodejs_18, npm-9_x        ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ install    │ mkdir -p /var/log/nginx && mkdir -p /var/cache/nginx            ║
+║            │ composer install --ignore-platform-reqs                         ║
+║            │ npm ci                                                          ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ build      │ npm run build                                                   ║
+║──────────────────────────────────────────────────────────────────────────────║
+║ start      │ php artisan serve --host=0.0.0.0 --port=8080                    ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load build definition from Dockerfile
+[internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+[internal] load metadata for ghcr.io/railwayapp/nixpacks:ubuntu-1745885067
+[internal] load .dockerignore
+[internal] load .dockerignore
+[internal] load .dockerignore
+[internal] load .dockerignore
+[internal] load build context
+[internal] load build context
+[internal] load build context
+[stage-0  2/10] WORKDIR /app/
+[ 3/12] COPY .nixpacks/nixpkgs-e24b4c09e963677b1beea49d411cd315a024ad3a.nix .nixpacks/nixpkgs-e24b4c09e963677b1beea49d411cd315a024ad3a.nix
+[ 4/12] RUN nix-env -if .nixpacks/nixpkgs-e24b4c09e963677b1beea49d411cd315a024ad3a.nix && nix-collect-garbage -d
+[ 5/12] COPY .nixpacks/assets /assets/
+[ 6/12] COPY . /app/.
+[ 7/12] RUN  mkdir -p /var/log/nginx && mkdir -p /var/cache/nginx
+[ 8/12] RUN  composer install --ignore-platform-reqs
+[ 9/12] RUN  npm ci
+[10/12] COPY . /app/.
+[11/12] RUN  npm run build
+[12/12] COPY . /app
+[auth] sharing credentials for us-east4.registry.rlwy.net
+[auth] sharing credentials for us-east4.registry.rlwy.net
+importing to docker
+importing to docker
+=== Successfully Built! ===
+Run:
+docker run -it us-east4.registry.rlwy.net/f721ccaf-9ba2-4a44-8f9a-71f8b9ba6490:d3bb206b-bfc4-487b-8cfa-d1d2c6b78633
+[92mBuild time: 14.72 seconds[0m
