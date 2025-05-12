@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
+use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 
 
 // Reemplaza la ruta welcome por una redirección al login
@@ -32,9 +33,14 @@ Route::middleware(['auth', 'rol:almacenista'])->group(function () {
     Route::resource('movimientos', MovimientoController::class);
 });
 
-Route::get('/email/verify', [EmailVerificationPromptController::class, '__invoke'])
+// Muestra el prompt de verificación
+Route::get('/email/verify', EmailVerificationPromptController::class)
      ->middleware('auth')
      ->name('verification.notice');
 
+// Envía el email de verificación
+Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'store'])
+     ->middleware(['auth', 'throttle:6,1'])
+     ->name('verification.send');
 
 require __DIR__.'/auth.php';
