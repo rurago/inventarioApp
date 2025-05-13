@@ -16,6 +16,7 @@ class InventarioController extends Controller
     {
         // Formulario para crear producto
         return view('inventario.create');
+        
     }
 
     public function store(Request $request)
