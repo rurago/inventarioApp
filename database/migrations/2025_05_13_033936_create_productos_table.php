@@ -9,18 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('descripcion')->nullable();
-            $table->integer('cantidad')->default(0);
-            $table->boolean('activo')->default(true); // true = activo, false = dado de baja
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
