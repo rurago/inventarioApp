@@ -22,7 +22,6 @@
                         <th class="px-4 py-2">Fecha</th>
                         <th class="px-4 py-2">Producto</th>
                         <th class="px-4 py-2">Tipo</th>
-                        <th class="px-4 py-2">Cantidad</th>
                     </tr>
                 </thead>
                 <tbody>
