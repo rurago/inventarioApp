@@ -1,18 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Producto;
+use Illuminate\Http\Request;
 
-class Producto extends Model
+class ProductoController extends Controller
 {
-    use HasFactory;
-
-    protected $fillable = [
-        'nombre',
-        'descripcion',
-        'cantidad',
-        'activo',
-    ];
+    public function index()
+    {
+        $productos = Producto::all();
+        return view('productos.index', compact('productos'));
+    }
 }
