@@ -78,13 +78,16 @@ class InventarioController extends Controller
     {
         $request->validate([
             'producto_id' => 'required|exists:productos,id',
-            'cantidad' => 'required|integer|min:1',
+            'cantidad'    => 'required|integer|min:1',
         ]);
 
         $producto = Producto::findOrFail($request->producto_id);
 
         if ($producto->cantidad < $request->cantidad) {
-            return redirect()->back()->withErrors(['cantidad' => 'No hay suficiente inventario disponible.']);
+            // Redirige de vuelta con un error en el campo 'cantidad'
+            return back()
+                ->withErrors(['cantidad' => 'No hay suficiente stock disponible.'])
+                ->withInput();
         }
 
         $producto->cantidad -= $request->cantidad;
@@ -92,11 +95,15 @@ class InventarioController extends Controller
 
         Movimiento::create([
             'producto_id' => $producto->id,
-            'tipo' => 'salida',
-            'cantidad' => $request->cantidad,
+            'tipo'        => 'salida',
+            'cantidad'    => $request->cantidad,
         ]);
-        return redirect()->route('inventario.index')->with('success', 'Salida registrada correctamente.');
+
+        return redirect()
+            ->route('inventario.index')
+            ->with('success', 'Salida registrada correctamente.');
     }
+
 
 
     public function toggleStatus($id)
