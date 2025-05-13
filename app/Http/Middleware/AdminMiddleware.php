@@ -9,12 +9,10 @@ class AdminMiddleware
 {
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->rol === 'Administrador') {
+        if (Auth::check() && Auth::user()->rol === 'admin') {
             return $next($request);
         }
 
         abort(403, 'No tienes permisos para acceder a esta página.');
     }
 }
-
-
