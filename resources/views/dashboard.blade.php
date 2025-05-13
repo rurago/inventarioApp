@@ -7,13 +7,17 @@
     </x-slot>
 
     <div class="py-6">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                <a href="{{ route('productos.index') }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
-                    Ver Productos
-                </a>
-            </div>
-        </div>
+        @auth
+            @if (auth()->user()->rol === 'Administrador')
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                    <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
+                        <a href="{{ route('productos.index') }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
+                            Ver Productos
+                        </a>
+                    </div>
+                </div>
+            @endif
+        @endauth
     </div>
 
     <div class="py-12">
@@ -26,18 +30,25 @@
                         📦 Ver Inventario
                     </a>
 
-                    <a href="{{ route('inventario.create') }}" class="block p-4 bg-green-100 rounded hover:bg-green-200">
-                        ➕ Agregar Nuevo Producto
-                    </a>
+                    @auth
+                        @if (auth()->user()->rol === 'Administrador')
+                            <a href="{{ route('inventario.create') }}" class="block p-4 bg-green-100 rounded hover:bg-green-200">
+                                ➕ Agregar Nuevo Producto
+                            </a>
+                        @endif
+                    @endauth
+                    
+                    @auth
+                        @if (auth()->user()->rol === 'Almacenista')
+                            <a href="{{ route('inventario.entrada') }}" class="block p-4 bg-yellow-100 rounded hover:bg-yellow-200">
+                                🔼 Entrada de Productos
+                            </a>
 
-                    <a href="{{ route('inventario.entrada') }}" class="block p-4 bg-yellow-100 rounded hover:bg-yellow-200">
-                        🔼 Entrada de Productos
-                    </a>
-
-                    <a href="{{ route('inventario.salida') }}" class="block p-4 bg-red-100 rounded hover:bg-red-200">
-                        🔽 Salida de Productos
-                    </a>
-
+                            <a href="{{ route('inventario.salida') }}" class="block p-4 bg-red-100 rounded hover:bg-red-200">
+                                🔽 Salida de Productos
+                            </a>
+                        @endif
+                    @endauth
                     <a href="{{ route('movimientos.index') }}" class="block p-4 bg-gray-100 rounded hover:bg-gray-200">
                         📋 Ver Historial de Movimientos
                     </a>

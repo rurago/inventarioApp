@@ -20,7 +20,11 @@
                             <th class="px-6 py-3">Descripción</th>
                             <th class="px-6 py-3">Cantidad</th>
                             <th class="px-6 py-3">Activo</th>
-                            <th class="px-6 py-3">Acciones</th>
+                            @auth
+                                @if (auth()->user()->rol === 'Administrador')
+                                    <th class="px-6 py-3">Acciones</th>
+                                @endif
+                            @endauth
                         </tr>
                     </thead>
                     <tbody>
@@ -36,16 +40,20 @@
                                         <span class="text-red-600 font-semibold">Inactivo</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 flex space-x-2">
-                                    <a href="{{ route('productos.edit', $producto) }}" class="text-blue-500 hover:underline">Editar</a>
+                                @auth
+                                    @if (auth()->user()->rol === 'Administrador')
+                                        <td class="px-6 py-4 flex space-x-2">
+                                            <a href="{{ route('productos.edit', $producto) }}" class="text-blue-500 hover:underline">Editar</a>
 
-                                    <form action="{{ route($producto->activo ? 'productos.baja' : 'productos.activar', $producto) }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="text-yellow-600 hover:underline">
-                                            {{ $producto->activo ? 'Dar de baja' : 'Reactivar' }}
-                                        </button>
-                                    </form>
-                                </td>
+                                            <form action="{{ route($producto->activo ? 'productos.baja' : 'productos.activar', $producto) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="text-yellow-600 hover:underline">
+                                                    {{ $producto->activo ? 'Dar de baja' : 'Reactivar' }}
+                                                </button>
+                                            </form>
+                                        </td>
+                                    @endif
+                                @endauth
                             </tr>
                         @endforeach
                     </tbody>

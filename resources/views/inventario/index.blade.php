@@ -19,7 +19,11 @@
                     <th class="px-4 py-2 border">Descripción</th>
                     <th class="px-4 py-2 border">Cantidad</th>
                     <th class="px-4 py-2 border">Estatus</th>
-                    <th class="px-4 py-2 border">Acciones</th>
+                    @auth
+                        @if (auth()->user()->rol === 'Administrador')
+                            <th class="px-4 py-2 border">Acciones</th>
+                        @endif
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -34,14 +38,18 @@
                                 {{ $producto->activo ? 'Activo' : 'Inactivo' }}
                             </span>
                         </td>
-                        <td class="border px-4 py-2">
-                            <form action="{{ route('inventario.toggle', $producto->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="text-blue-600 hover:underline">
-                                    {{ $producto->activo ? 'Dar de baja' : 'Reactivar' }}
-                                </button>
-                            </form>
-                        </td>
+                        @auth
+                            @if (auth()->user()->rol === 'Administrador')
+                                <td class="border px-4 py-2">
+                                    <form action="{{ route('inventario.toggle', $producto->id) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="text-blue-600 hover:underline">
+                                            {{ $producto->activo ? 'Dar de baja' : 'Reactivar' }}
+                                        </button>
+                                    </form>
+                                </td>
+                            @endif
+                        @endauth
                     </tr>
                 @empty
                     <tr>
