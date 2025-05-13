@@ -1,16 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 
-use App\Models\Producto;
-use Illuminate\Http\Request;
-
-class ProductoController extends Controller
+class Producto extends Model
 {
-    public function index()
-    {
-        $productos = Producto::all();
-        return view('productos.index', compact('productos'));
-    }
+    //
 }
