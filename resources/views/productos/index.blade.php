@@ -1,34 +1,53 @@
-@extends('layouts.app')
+{{-- resources/views/productos/index.blade.php --}}
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Listado de Productos') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-<div class="container">
-    <h1>Productos</h1>
-    <a href="{{ route('productos.create') }}" class="btn btn-primary mb-3">Nuevo producto</a>
+    <div class="py-6">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <a href="{{ route('productos.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+                + Agregar Producto
+            </a>
 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Stock</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($productos as $producto)
-                <tr>
-                    <td>{{ $producto->nombre }}</td>
-                    <td>{{ $producto->stock }}</td>
-                    <td>
-                        <a href="{{ route('productos.edit', $producto) }}" class="btn btn-sm btn-warning">Editar</a>
-                        <form action="{{ route('productos.destroy', $producto) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button onclick="return confirm('¿Eliminar este producto?')" class="btn btn-sm btn-danger">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-@endsection
+            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
+                <table class="min-w-full">
+                    <thead>
+                        <tr>
+                            <th class="px-6 py-3">Nombre</th>
+                            <th class="px-6 py-3">Descripción</th>
+                            <th class="px-6 py-3">Cantidad</th>
+                            <th class="px-6 py-3">Activo</th>
+                            <th class="px-6 py-3">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($productos as $producto)
+                            <tr class="border-t">
+                                <td class="px-6 py-4">{{ $producto->nombre }}</td>
+                                <td class="px-6 py-4">{{ $producto->descripcion }}</td>
+                                <td class="px-6 py-4">{{ $producto->cantidad }}</td>
+                                <td class="px-6 py-4">
+                                    @if ($producto->activo)
+                                        <span class="text-green-600 font-semibold">Activo</span>
+                                    @else
+                                        <span class="text-red-600 font-semibold">Inactivo</span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4">
+                                    <a href="{{ route('productos.edit', $producto) }}" class="text-blue-500 hover:underline">Editar</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+
+                @if ($productos->isEmpty())
+                    <div class="p-4 text-gray-600">No hay productos registrados.</div>
+                @endif
+            </div>
+        </div>
+    </div>
+</x-app-layout>
