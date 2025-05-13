@@ -16,6 +16,14 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
+                @auth
+                    @if (auth()->user()->rol === 'Administrador')
+                        <a href="{{ route('usuarios.index') }}" class="text-blue-600 hover:underline">
+                            Gestionar Usuarios
+                        </a>
+                    @endif
+                @endauth
             </div>
 
             <!-- Settings Dropdown -->
