@@ -3,20 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Producto;
 
 class InventarioController extends Controller
 {
     public function index()
     {
-        // Mostrar listado de productos
-        return view('inventario.index');
+        $productos = Producto::all(); // o ->paginate(10)
+        return view('inventario.index', compact('productos'));
     }
 
     public function create()
     {
         // Formulario para crear producto
         return view('inventario.create');
-        
+
     }
 
     public function store(Request $request)
