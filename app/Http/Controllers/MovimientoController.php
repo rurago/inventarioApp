@@ -7,6 +7,7 @@ use App\Models\Producto;
 use App\Models\Movimiento;
 use Illuminate\Support\Facades\DB;
 
+
 class MovimientoController extends Controller
 {
     public function index(Request $request)
