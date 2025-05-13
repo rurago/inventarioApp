@@ -8,9 +8,6 @@ use App\Http\Controllers\MovimientoController;
 // Ruta protegida por autenticación
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/', function () {
-        return redirect()->route('dashboard');
-    });
     // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -18,22 +15,20 @@ Route::middleware(['auth'])->group(function () {
 
     // Inventario: Ver inventario
     Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index');
-
-    // Agregar nuevos productos
-    Route::get('/inventario/create', [InventarioController::class, 'create'])->name('inventario.create');
+    Route::get('/inventario/crear', [InventarioController::class, 'create'])->name('inventario.create');
     Route::post('/inventario', [InventarioController::class, 'store'])->name('inventario.store');
 
     // Entrada de productos
     Route::get('/inventario/entrada', [InventarioController::class, 'entradaForm'])->name('inventario.entrada');
-    Route::post('/inventario/entrada', [InventarioController::class, 'entrada'])->name('inventario.entrada.store');
+    Route::post('/inventario/entrada', [InventarioController::class, 'entradaStore'])->name('inventario.entrada.store');
 
     // Salida de productos
     Route::get('/inventario/salida', [InventarioController::class, 'salidaForm'])->name('inventario.salida');
-    Route::post('/inventario/salida', [InventarioController::class, 'salida'])->name('inventario.salida.store');
+    Route::post('/inventario/salida', [InventarioController::class, 'salidaStore'])->name('inventario.salida.store');
 
     // Dar de baja o reactivar productos
     Route::post('/inventario/{id}/baja', [InventarioController::class, 'baja'])->name('inventario.baja');
-    Route::post('/inventario/{id}/reactivar', [InventarioController::class, 'reactivar'])->name('inventario.reactivar');
+    Route::post('/inventario/{id}/toggle', [InventarioController::class, 'toggleStatus'])->name('inventario.toggle');
 
     // Historial de movimientos
     Route::get('/movimientos', [MovimientoController::class, 'index'])->name('movimientos.index');
