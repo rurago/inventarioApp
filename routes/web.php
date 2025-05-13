@@ -5,11 +5,18 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\MovimientoController;
 use App\Http\Controllers\ProductoController;
+use App\Http\Controllers\UsuarioController;
 
 // Ruta pública
 Route::get('/', function () {
     return view('welcome'); // o cualquier vista pública que quieras mostrar
 })->name('welcome');
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/usuarios/roles', [UsuarioController::class, 'editarRoles'])->name('usuarios.roles');
+    Route::post('/usuarios/roles/{user}', [UsuarioController::class, 'actualizarRol'])->name('usuarios.roles.actualizar');
+});
 
 // Ruta protegida por autenticación
 Route::middleware(['auth'])->group(function () {
