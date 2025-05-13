@@ -8,7 +8,7 @@
 
     <div class="py-6">
         @auth
-            @if (auth()->user()->rol === 'Administrador')
+            @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
                         <a href="{{ route('productos.index') }}" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">
@@ -31,7 +31,7 @@
                     </a>
 
                     @auth
-                        @if (auth()->user()->rol === 'Administrador')
+                        @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                             <a href="{{ route('inventario.create') }}" class="block p-4 bg-green-100 rounded hover:bg-green-200">
                                 ➕ Agregar Nuevo Producto
                             </a>
