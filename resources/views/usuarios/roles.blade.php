@@ -27,7 +27,7 @@
                     <td class="p-2 capitalize">{{ $usuario->rol }}</td>
                     <td class="p-2">
                         @if($usuario->id !== auth()->id())
-                        <form method="POST" action="{{ route('usuarios.roles.actualizar', $usuario) }}">
+                        <form method="POST" action="{{ route('usuarios.actualizarRol', $usuario) }}">
                             @csrf
                             <select name="rol" class="border p-1 mr-2">
                                 <option value="admin" {{ $usuario->rol === 'admin' ? 'selected' : '' }}>Administrador</option>

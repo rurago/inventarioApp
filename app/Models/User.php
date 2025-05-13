@@ -16,17 +16,12 @@ class User extends Authenticatable
         'name',    
         'email',   
         'password',
-        'rol_id',
+        'rol',
     ];
 
     protected $hidden = [
         'password',
     ];
-
-    public function rol()
-    {
-        return $this->belongsTo(Rol::class);
-    }
 
     // Reemplaza el campo password usado por Laravel
     public function getAuthPassword()

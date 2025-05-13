@@ -24,6 +24,6 @@ class UsuarioController extends Controller
         $user->rol = $request->rol;
         $user->save();
 
-        return redirect()->route('usuarios.roles')->with('success', 'Rol actualizado correctamente');
+        return redirect()->route('usuarios.index')->with('success', 'Rol actualizado correctamente');
     }
 }
