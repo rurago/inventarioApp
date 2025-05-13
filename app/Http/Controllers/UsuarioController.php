@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Rol;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsuarioController extends Controller
 {
     // Mostrar todos los usuarios con sus roles disponibles
     public function editarRoles()
     {
+        DB::enableQueryLog(); // 🐞 Habilita el log de queries
+
         $usuarios = User::with('rol')->get();
         $roles = Rol::all();
 
