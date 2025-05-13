@@ -65,7 +65,7 @@ class InventarioController extends Controller
             'cantidad' => $request->cantidad,
         ]);
 
-        return redirect()->route('productos.index')->with('success', 'Entrada registrada correctamente.');
+        return redirect()->route('inventario.index')->with('success', 'Entrada registrada correctamente.');
     }
 
     public function salidaForm()
@@ -96,7 +96,7 @@ class InventarioController extends Controller
             'cantidad' => $request->cantidad,
         ]);
 
-        return redirect()->route('productos.index')->with('success', 'Salida registrada correctamente.');
+        return redirect()->route('inventario.index')->with('success', 'Salida registrada correctamente.');
     }
 
 
