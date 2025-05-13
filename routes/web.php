@@ -12,7 +12,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('dashboard');
     });
-    
+
     // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard');
@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/inventario/entrada', [InventarioController::class, 'entradaForm'])->name('inventario.entrada');
     Route::post('/inventario/entrada', [InventarioController::class, 'entradaStore'])->name('inventario.entrada.store');
     Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
+    Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
 
     // Salida de productos
     Route::get('/inventario/salida', [InventarioController::class, 'salidaForm'])->name('inventario.salida');
