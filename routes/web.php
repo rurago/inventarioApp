@@ -26,8 +26,10 @@ Route::middleware(['auth'])->group(function () {
     // Entrada de productos
     Route::get('/inventario/entrada', [InventarioController::class, 'entradaForm'])->name('inventario.entrada');
     Route::post('/inventario/entrada', [InventarioController::class, 'entradaStore'])->name('inventario.entrada.store');
-    Route::get('/productos', [ProductoController::class, 'index'])->name('productos.index');
-    Route::get('/productos/create', [ProductoController::class, 'create'])->name('productos.create');
+    
+
+    Route::resource('productos', ProductoController::class);
+
 
     // Salida de productos
     Route::get('/inventario/salida', [InventarioController::class, 'salidaForm'])->name('inventario.salida');
