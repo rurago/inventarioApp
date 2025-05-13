@@ -36,8 +36,21 @@
                                         <span class="text-red-600 font-semibold">Inactivo</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4">
+                                <td class="px-6 py-4 flex space-x-2">
                                     <a href="{{ route('productos.edit', $producto) }}" class="text-blue-500 hover:underline">Editar</a>
+
+                                    <form action="{{ route($producto->activo ? 'productos.baja' : 'productos.activar', $producto) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="text-yellow-600 hover:underline">
+                                            {{ $producto->activo ? 'Dar de baja' : 'Reactivar' }}
+                                        </button>
+                                    </form>
+
+                                    <form action="{{ route('productos.destroy', $producto) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este producto?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

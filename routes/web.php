@@ -29,6 +29,9 @@ Route::middleware(['auth'])->group(function () {
     
 
     Route::resource('productos', ProductoController::class);
+    Route::post('/productos/{producto}/baja', [ProductoController::class, 'baja'])->name('productos.baja');
+    Route::post('/productos/{producto}/activar', [ProductoController::class, 'activar'])->name('productos.activar');
+
 
 
     // Salida de productos

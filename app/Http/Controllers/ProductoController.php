@@ -63,4 +63,28 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
     }
 
+    public function baja(Producto $producto)
+    {
+        $producto->activo = false;
+        $producto->save();
+
+        return redirect()->route('productos.index')->with('success', 'Producto dado de baja.');
+    }
+
+    public function activar(Producto $producto)
+    {
+        $producto->activo = true;
+        $producto->save();
+
+        return redirect()->route('productos.index')->with('success', 'Producto reactivado.');
+    }
+
+    public function destroy(Producto $producto)
+    {
+        $producto->delete();
+
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado permanentemente.');
+    }
+
+
 }
