@@ -18,7 +18,7 @@ class UsuarioController extends Controller
     public function actualizarRol(Request $request, User $user)
     {
         $request->validate([
-            'rol' => 'required|in:admin,almacenista',
+            'rol' => 'required|in:Administrador,Almacenista',
         ]);
 
         $user->rol = $request->rol;
