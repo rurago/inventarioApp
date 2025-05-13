@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Http\MovimientoController;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,7 @@ use App\Models\Producto;
 use App\Models\Movimiento;
 use Illuminate\Support\Facades\DB;
 
-class Movimiento extends Model
+class MovimientoController extends Model
 {
     use HasFactory;
 
