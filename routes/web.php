@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function () {
 
     // Historial de movimientos
     Route::get('/movimientos', [MovimientoController::class, 'index'])->name('movimientos.index');
+    Route::get('/movimientos/resumen', [MovimientoController::class, 'resumen'])->name('movimientos.resumen');
+
 
 });
 
