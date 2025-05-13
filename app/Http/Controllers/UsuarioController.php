@@ -12,13 +12,14 @@ class UsuarioController extends Controller
     // Mostrar todos los usuarios con sus roles disponibles
     public function editarRoles()
     {
-        DB::enableQueryLog(); // 🐞 Habilita el log de queries
+        // 🐞 Habilita el log de queries
+        //DB::enableQueryLog(); 
 
         $usuarios = User::with('rol')->get();
         $roles = Rol::all();
 
         // 🐞 Imprimir los queries ejecutados
-        dd(DB::getQueryLog());
+        //dd(DB::getQueryLog());
         return view('usuarios.roles', compact('usuarios', 'roles'));
     }
 
