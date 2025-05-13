@@ -61,6 +61,7 @@ class InventarioController extends Controller
         // Guardar el movimiento
         Movimiento::create([
             'producto_id' => $producto->id,
+            'user_id' => auth()->id(),
             'tipo' => 'entrada',
             'cantidad' => $request->cantidad,
         ]);
@@ -95,6 +96,7 @@ class InventarioController extends Controller
 
         Movimiento::create([
             'producto_id' => $producto->id,
+            'user_id' => auth()->id(),
             'tipo'        => 'salida',
             'cantidad'    => $request->cantidad,
         ]);

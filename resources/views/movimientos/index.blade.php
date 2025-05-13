@@ -22,6 +22,8 @@
                         <th class="px-4 py-2">Fecha</th>
                         <th class="px-4 py-2">Producto</th>
                         <th class="px-4 py-2">Tipo</th>
+                        <th class="px-4 py-2">Cantidad</th>
+                        <th class="px-4 py-2">Usuario</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +39,7 @@
                                 @endif
                             </td>
                             <td class="px-4 py-2">{{ $mov->cantidad }}</td>
+                            <td>{{ $movimiento->user->name }}</td>
                         </tr>
                     @empty
                         <tr>
