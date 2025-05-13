@@ -6,10 +6,14 @@
     </x-slot>
 
     <div class="py-4 px-6">
-        <a href="{{ route('inventario.create') }}"
-           class="mb-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-            ➕ Agregar Producto
-        </a>
+        @auth
+            @if (auth()->user()->rol === 'Administrador')
+                <a href="{{ route('inventario.create') }}"
+                   class="mb-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                    ➕ Agregar Producto
+                </a>
+            @endif
+        @endauth
 
         <table class="min-w-full bg-white border mt-4">
             <thead>

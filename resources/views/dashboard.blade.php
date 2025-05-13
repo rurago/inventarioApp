@@ -35,6 +35,9 @@
                             <a href="{{ route('inventario.create') }}" class="block p-4 bg-green-100 rounded hover:bg-green-200">
                                 ➕ Agregar Nuevo Producto
                             </a>
+                            <a href="{{ route('movimientos.index') }}" class="block p-4 bg-gray-100 rounded hover:bg-gray-200">
+                                📋 Ver Historial de Movimientos
+                            </a>
                         @endif
                     @endauth
                     
@@ -49,9 +52,7 @@
                             </a>
                         @endif
                     @endauth
-                    <a href="{{ route('movimientos.index') }}" class="block p-4 bg-gray-100 rounded hover:bg-gray-200">
-                        📋 Ver Historial de Movimientos
-                    </a>
+                    
                 </div>
             </div>
         </div>
