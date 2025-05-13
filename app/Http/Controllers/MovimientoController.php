@@ -1,10 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class MovimientoController extends Controller
+class Movimiento extends Model
 {
-    //
+    use HasFactory;
+
+    protected $fillable = [
+        'producto_id',
+        'tipo',
+        'cantidad',
+    ];
+
+    public function producto()
+    {
+        return $this->belongsTo(Producto::class);
+    }
 }
