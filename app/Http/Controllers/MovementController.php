@@ -18,10 +18,4 @@ class MovementController extends Controller
         $movimientos = $query->orderBy('fecha', 'desc')->get();
         return view('movimientos.index', compact('movimientos'));
     }
-
-    public function historico()
-    {
-        $movimientos = Movimiento::with('producto')->latest()->paginate(20);
-        return view('movimientos.historico', compact('movimientos'));
-    }
 }
