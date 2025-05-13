@@ -45,12 +45,6 @@
                                             {{ $producto->activo ? 'Dar de baja' : 'Reactivar' }}
                                         </button>
                                     </form>
-
-                                    <form action="{{ route('productos.destroy', $producto) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este producto?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:underline">Eliminar</button>
-                                    </form>
                                 </td>
                             </tr>
                         @endforeach
