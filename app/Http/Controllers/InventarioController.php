@@ -57,14 +57,35 @@ class InventarioController extends Controller
 
     public function salidaForm()
     {
-        // Formulario para salida de productos
-        return view('inventario.salida');
+        $productos = Producto::where('activo', true)->get();
+        return view('inventario.salida', compact('productos'));
     }
 
     public function salidaStore(Request $request)
     {
-        // Guardar movimiento de salida
+        $request->validate([
+            'producto_id' => 'required|exists:productos,id',
+            'cantidad' => 'required|integer|min:1',
+        ]);
+
+        $producto = Producto::findOrFail($request->producto_id);
+
+        if ($producto->cantidad < $request->cantidad) {
+            return redirect()->back()->withErrors(['cantidad' => 'No hay suficiente inventario disponible.']);
+        }
+
+        $producto->cantidad -= $request->cantidad;
+        $producto->save();
+
+        Movimiento::create([
+            'producto_id' => $producto->id,
+            'tipo' => 'salida',
+            'cantidad' => $request->cantidad,
+        ]);
+
+        return redirect()->route('productos.index')->with('success', 'Salida registrada correctamente.');
     }
+
 
     public function toggleStatus($id)
     {

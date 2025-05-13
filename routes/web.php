@@ -32,8 +32,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/productos/{producto}/baja', [ProductoController::class, 'baja'])->name('productos.baja');
     Route::post('/productos/{producto}/activar', [ProductoController::class, 'activar'])->name('productos.activar');
 
-
-
     // Salida de productos
     Route::get('/inventario/salida', [InventarioController::class, 'salidaForm'])->name('inventario.salida');
     Route::post('/inventario/salida', [InventarioController::class, 'salidaStore'])->name('inventario.salida.store');
