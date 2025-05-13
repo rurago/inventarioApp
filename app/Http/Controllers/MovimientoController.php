@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Producto;
 use App\Models\Movimiento;
-use Illuminate\Support\Facades\DB;
 
 class MovimientoController extends Controller
 {
