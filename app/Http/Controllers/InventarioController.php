@@ -23,7 +23,20 @@ class InventarioController extends Controller
 
     public function store(Request $request)
     {
-        // Guardar nuevo producto en la base de datos
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string|max:255',
+            'cantidad' => 'required|integer|min:0',
+        ]);
+
+        Producto::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'cantidad' => $request->cantidad,
+            'activo' => true,
+        ]);
+
+        return redirect()->route('productos.index')->with('success', 'Producto creado exitosamente.');
     }
 
     public function entradaForm()
