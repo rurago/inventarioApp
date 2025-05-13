@@ -8,6 +8,9 @@ use App\Http\Controllers\MovimientoController;
 // Ruta protegida por autenticación
 Route::middleware(['auth'])->group(function () {
 
+    Route::get('/', function () {
+        return redirect()->route('dashboard');
+    });
     // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard');
