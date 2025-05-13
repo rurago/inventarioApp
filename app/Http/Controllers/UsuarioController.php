@@ -13,6 +13,9 @@ class UsuarioController extends Controller
     {
         $usuarios = User::with('rol')->get();
         $roles = Rol::all();
+
+        // 🐞 Imprimir los queries ejecutados
+        dd(DB::getQueryLog());
         return view('usuarios.roles', compact('usuarios', 'roles'));
     }
 
