@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductoController;
 Route::middleware(['auth'])->group(function () {
 
     Route::get('/', function () {
-        return redirect()->route('dashboard');
+        return redirect()->route('welcome');
     });
 
     // Dashboard
