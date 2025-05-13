@@ -13,7 +13,8 @@ class AdminMiddleware
             return $next($request);
         }
 
-        abort(403, 'Acceso no autorizado');
+        abort(403, 'No tienes permisos para acceder a esta página.');
     }
 }
+
 
