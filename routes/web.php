@@ -14,9 +14,10 @@ Route::get('/', function () {
 
 
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/usuarios/roles', [UsuarioController::class, 'editarRoles'])->name('usuarios.roles');
-    Route::post('/usuarios/roles/{user}', [UsuarioController::class, 'actualizarRol'])->name('usuarios.roles.actualizar');
+    Route::get('/usuarios', [UsuarioController::class, 'editarRoles'])->name('usuarios.index');
+    Route::post('/usuarios/{user}/actualizar-rol', [UsuarioController::class, 'actualizarRol'])->name('usuarios.actualizarRol');
 });
+
 
 // Ruta protegida por autenticación
 Route::middleware(['auth'])->group(function () {
