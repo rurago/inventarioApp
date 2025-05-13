@@ -102,6 +102,10 @@ class InventarioController extends Controller
 
     public function toggleStatus($id)
     {
-        // Dar de baja o reactivar un producto
+        $producto = Producto::findOrFail($id);
+        $producto->activo = !$producto->activo;
+        $producto->save();
+
+        return redirect()->back()->with('success', 'Estado del producto actualizado.');
     }
 }

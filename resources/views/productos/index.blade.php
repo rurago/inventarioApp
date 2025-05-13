@@ -36,13 +36,13 @@
                                         <span class="text-red-600 font-semibold">Inactivo</span>
                                     @endif
                                 </td>
-                                <td class="px-6 py-4 flex space-x-2">
+                                <td class="px-6 py-4 flex gap-2">
                                     <a href="{{ route('productos.edit', $producto) }}" class="text-blue-500 hover:underline">Editar</a>
 
-                                    <form action="{{ route($producto->activo ? 'productos.baja' : 'productos.activar', $producto) }}" method="POST">
+                                    <form action="{{ route('inventario.toggle', $producto->id) }}" method="POST" onsubmit="return confirm('¿Estás seguro de cambiar el estado del producto?');">
                                         @csrf
-                                        <button type="submit" class="text-yellow-600 hover:underline">
-                                            {{ $producto->activo ? 'Dar de baja' : 'Reactivar' }}
+                                        <button type="submit" class="text-sm {{ $producto->activo ? 'text-red-600' : 'text-green-600' }} hover:underline">
+                                            {{ $producto->activo ? 'Dar de Baja' : 'Reactivar' }}
                                         </button>
                                     </form>
                                 </td>
