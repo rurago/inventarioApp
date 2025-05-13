@@ -13,12 +13,6 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/usuarios', [UsuarioController::class, 'editarRoles'])->name('usuarios.index');
-    Route::post('/usuarios/{user}/actualizar-rol', [UsuarioController::class, 'actualizarRol'])->name('usuarios.actualizarRol');
-});
-
-
 // Ruta protegida por autenticación
 Route::middleware(['auth'])->group(function () {
 
@@ -52,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
     // Historial de movimientos
     Route::get('/movimientos', [MovimientoController::class, 'index'])->name('movimientos.index');
     Route::get('/movimientos/resumen', [MovimientoController::class, 'resumen'])->name('movimientos.resumen');
+    // modificar usuario
+    Route::get('/usuarios', [UsuarioController::class, 'editarRoles'])->name('usuarios.index');
+    Route::post('/usuarios/{user}/actualizar-rol', [UsuarioController::class, 'actualizarRol'])->name('usuarios.actualizarRol');
 
 
 });
