@@ -22,14 +22,17 @@
                     <tr class="border-b">
                         <td class="p-2">{{ $usuario->name }}</td>
                         <td class="p-2">{{ $usuario->email }}</td>
-                        <td class="p-2 capitalize">{{ $usuario->rol }}</td>
+                        <td class="p-2 capitalize">{{ $usuario->rol ? $usuario->rol->nombre : 'Sin rol' }}</td>
                         <td class="p-2">
                             @if($usuario->id !== auth()->id())
                             <form method="POST" action="{{ route('usuarios.actualizarRol', $usuario) }}">
                                 @csrf
-                                <select name="rol" class="border p-1 mr-2">
-                                    <option value="Administrador" {{ $usuario->rol === 'Administrador' ? 'selected' : '' }}>Administrador</option>
-                                    <option value="Almacenista" {{ $usuario->rol === 'Almacenista' ? 'selected' : '' }}>Almacenista</option>
+                                <select name="rol_id" class="border p-1 mr-2" required>
+                                    @foreach($roles as $rol)
+                                        <option value="{{ $rol->id }}" {{ $usuario->rol_id == $rol->id ? 'selected' : '' }}>
+                                            {{ $rol->nombre }}
+                                        </option>
+                                    @endforeach
                                 </select>
                                 <button class="bg-blue-500 text-white px-2 py-1 rounded">Guardar</button>
                             </form>

@@ -28,4 +28,9 @@ class User extends Authenticatable
     {
         return $this->password;
     }
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class, 'rol_id');
+    }
 }
