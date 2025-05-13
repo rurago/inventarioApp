@@ -95,7 +95,6 @@ class InventarioController extends Controller
             'tipo' => 'salida',
             'cantidad' => $request->cantidad,
         ]);
-
         return redirect()->route('inventario.index')->with('success', 'Salida registrada correctamente.');
     }
 
