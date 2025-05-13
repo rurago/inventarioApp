@@ -39,4 +39,28 @@ class ProductoController extends Controller
         return redirect()->route('productos.index')->with('success', 'Producto agregado correctamente.');
     }
 
+    public function edit($id)
+    {
+        $producto = Producto::findOrFail($id);
+        return view('productos.edit', compact('producto'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'descripcion' => 'nullable|string|max:255',
+            'cantidad' => 'required|integer|min:0',
+        ]);
+
+        $producto = Producto::findOrFail($id);
+        $producto->update([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'cantidad' => $request->cantidad,
+        ]);
+
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
+    }
+
 }
