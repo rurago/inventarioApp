@@ -6,12 +6,13 @@ use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\MovimientoController;
 use App\Http\Controllers\ProductoController;
 
+// Ruta pública
+Route::get('/', function () {
+    return view('welcome'); // o cualquier vista pública que quieras mostrar
+})->name('welcome');
+
 // Ruta protegida por autenticación
 Route::middleware(['auth'])->group(function () {
-
-    Route::get('/', function () {
-        return redirect()->route('welcome');
-    });
 
     // Dashboard
     Route::get('/dashboard', function () {
