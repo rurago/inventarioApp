@@ -51,7 +51,7 @@
         </header>
         <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <main class="flex max-w-[1035px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
-                <div class="bg-[#fff2f2] dark:bg-[#1D0002] relative lg:-ml-px -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[1038px] shrink-0 overflow-hidden">
+                <div class="bg-[#fff2f2] dark:bg-[#1D0002] relative lg:-ml-[75px] -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[1038px] shrink-0 overflow-hidden">
                     <img src="{{ asset('images/maxresdefault.jpg') }}" alt="Descripción" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
             </main>
