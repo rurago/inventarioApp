@@ -19,4 +19,10 @@ class Movimiento extends Model
     {
         return $this->belongsTo(Producto::class);
     }
+
+    public function index()
+    {
+        $movimientos = Movimiento::with('producto')->orderBy('created_at', 'desc')->get();
+        return view('movimientos.index', compact('movimientos'));
+    }
 }

@@ -15,6 +15,7 @@ class Movimiento extends Model
         'cantidad',
     ];
 
+    // app/Models/Movimiento.php
     public function producto()
     {
         return $this->belongsTo(Producto::class);
