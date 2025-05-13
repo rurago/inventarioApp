@@ -8,11 +8,20 @@ use Illuminate\Support\Facades\DB;
 
 class MovimientoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $movimientos = Movimiento::with('producto')->orderBy('created_at', 'desc')->get();
-        return view('movimientos.index', compact('movimientos'));
+        $tipo = $request->input('tipo');
+
+        $movimientos = Movimiento::with('producto')
+            ->when($tipo, function ($query, $tipo) {
+                $query->where('tipo', $tipo);
+            })
+            ->latest()
+            ->paginate(10);
+
+        return view('movimientos.index', compact('movimientos', 'tipo'));
     }
+
 
     public function resumen()
     {
