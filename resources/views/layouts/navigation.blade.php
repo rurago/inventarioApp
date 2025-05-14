@@ -6,7 +6,7 @@
             <div class="flex items-center space-x-8">
                 <!-- Logo -->
                 <a href="{{ route('dashboard') }}" class="flex items-center">
-                    <img src="{{ asset('images/logo.jpg') }}" alt="Logo" class="h-10 w-auto rounded-full shadow" />
+                    <img src="{{ asset('images/logo-castores-2024.jpg') }}" alt="Logo" class="h-10 w-auto rounded-full shadow" />
                 </a>
 
                 <!-- Enlaces de navegación -->
