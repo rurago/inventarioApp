@@ -11,7 +11,7 @@ Tecnologías utilizadas:
 - ORM: Eloquent (integrado en Laravel)
 - Frontend: Blade + Tailwind CSS
 - Despliegue: Railway
-
+- Sublime Text, DBeaver, Terminal, Brave
 Pasos para correr la aplicación
 
 1. Clonar el repositorio
