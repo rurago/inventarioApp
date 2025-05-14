@@ -39,18 +39,7 @@
                             @else
                                 <span class="text-gray-500 italic">No editable</span>
                             @endif
-                        <td class="p-2 capitalize">
-                            {{ $usuario->rol ? $usuario->rol->nombre : 'Sin rol' }}
                         </td>
-                        <td class="p-2">  
-                        <!-- En el formulario -->
-                        <select name="rol_id" class="border p-1 mr-2" required>
-                            @foreach($roles as $rol)
-                                <option value="{{ $rol->id }}" {{ $usuario->rol_id == $rol->id ? 'selected' : '' }}>
-                                    {{ $rol->nombre }}
-                                </option>
-                            @endforeach
-                        </select>
                     </tr>
                 @endforeach
             </tbody>
