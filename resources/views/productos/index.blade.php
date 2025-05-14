@@ -21,7 +21,7 @@
                             <th class="px-6 py-3">Cantidad</th>
                             <th class="px-6 py-3">Activo</th>
                             @auth
-                                @if (auth()->user()->rol === 'Administrador')
+                                @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                                     <th class="px-6 py-3">Acciones</th>
                                 @endif
                             @endauth
@@ -41,7 +41,7 @@
                                     @endif
                                 </td>
                                 @auth
-                                    @if (auth()->user()->rol === 'Administrador')
+                                    @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                                         <td class="px-6 py-4 flex space-x-2">
                                             <a href="{{ route('productos.edit', $producto) }}" class="text-blue-500 hover:underline">Editar</a>
 

@@ -16,7 +16,7 @@
                     </x-nav-link>
 
                     @auth
-                        @if (auth()->user()->rol === 'Administrador')
+                        @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                             <a href="{{ route('usuarios.index') }}" class="text-gray-600 hover:text-blue-600 font-medium transition">
                                 Gestionar Usuarios
                             </a>

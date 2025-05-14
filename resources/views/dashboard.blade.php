@@ -42,7 +42,7 @@
                     @endauth
                     
                     @auth
-                        @if (auth()->user()->rol === 'Almacenista')
+                        @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Almacenista')
                             <a href="{{ route('inventario.entrada') }}" class="block p-4 bg-yellow-100 rounded hover:bg-yellow-200">
                                 🔼 Entrada de Productos
                             </a>

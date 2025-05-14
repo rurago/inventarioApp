@@ -7,7 +7,7 @@
 
     <div class="py-4 px-6">
         @auth
-            @if (auth()->user()->rol === 'Administrador')
+            @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                 <a href="{{ route('inventario.create') }}"
                    class="mb-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                     ➕ Agregar Producto
@@ -24,7 +24,7 @@
                     <th class="px-4 py-2 border">Cantidad</th>
                     <th class="px-4 py-2 border">Estatus</th>
                     @auth
-                        @if (auth()->user()->rol === 'Administrador')
+                        @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                             <th class="px-4 py-2 border">Acciones</th>
                         @endif
                     @endauth
@@ -43,7 +43,7 @@
                             </span>
                         </td>
                         @auth
-                            @if (auth()->user()->rol === 'Administrador')
+                            @if (auth()->user()->rol && auth()->user()->rol->nombre === 'Administrador')
                                 <td class="border px-4 py-2">
                                     <form action="{{ route('inventario.toggle', $producto->id) }}" method="POST">
                                         @csrf
